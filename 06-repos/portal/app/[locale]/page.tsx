@@ -3,11 +3,9 @@ import FeaturesClient from './_components/features-client'
 import ParticleBackground from './_components/particle-background'
 import CountryPavilionClient from './_components/country-pavilion-client'
 import GlobeSection from './_components/globe-section'
-
-
-
 import SolutionsSection from './_components/solutions-section'
 import ProductPlatform from './_components/product-platform'
+import EnterpriseStats from './_components/enterprise-stats'
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
@@ -621,6 +619,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <a href="/en" className={`px-2.5 py-1.5 transition-colors ${locale === 'en' ? 'bg-slate-700 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}>EN</a>
             </div>
             <a
+              href={`/${locale}/login`}
+              className="px-4 py-2 border border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white font-semibold text-sm rounded-lg transition-colors"
+            >
+              {isZh ? '登录' : 'Login'}
+            </a>
+            <a
               href={`/${locale}/onboarding`}
               className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-[#0f172a] font-semibold text-sm rounded-lg transition-colors shadow-md shadow-amber-500/20"
             >
@@ -951,14 +955,85 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       </section>
 
       {/* ── Final CTA ── */}
-      <section className="py-24 bg-gradient-to-br from-amber-400 via-amber-500 to-orange-500">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-5xl font-black text-[#0f172a] mb-4 leading-tight">{t.cta.title}</h2>
-          <p className="text-amber-900/70 text-lg mb-10">{t.cta.subtitle}</p>
+      <section className="relative py-24 bg-[#070e1f] overflow-hidden">
+        {/* Background glows */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-amber-500/6 rounded-full blur-[140px]" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-violet-600/6 rounded-full blur-[120px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.04)_0%,transparent_70%)]" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto px-6 text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-amber-300 text-xs font-semibold uppercase tracking-wider">
+              {isZh ? '立即开始 · 免费体验' : 'Start Now · Free Access'}
+            </span>
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">{t.cta.title}</h2>
+          <p className="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">{t.cta.subtitle}</p>
+
+          {/* 3 Quick-Action Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            <a
+              href={`/${locale}/supply`}
+              className="group flex flex-col items-center gap-3 p-7 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1"
+            >
+              <span className="text-4xl group-hover:scale-110 transition-transform">📦</span>
+              <span className="font-bold text-white text-base">{isZh ? '发布供给' : 'Post Supply'}</span>
+              <span className="text-xs text-slate-400 text-center leading-relaxed">
+                {isZh ? '将商品推向全球买家，AI 自动撮合' : 'Reach global buyers with AI-powered matching'}
+              </span>
+              <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1">
+                {isZh ? '立即发布' : 'Post Now'}
+                <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+
+            <a
+              href={`/${locale}/demand`}
+              className="group flex flex-col items-center gap-3 p-7 rounded-2xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 hover:border-violet-500/40 transition-all duration-300 hover:-translate-y-1"
+            >
+              <span className="text-4xl group-hover:scale-110 transition-transform">🎯</span>
+              <span className="font-bold text-white text-base">{isZh ? '发布需求' : 'Post Demand'}</span>
+              <span className="text-xs text-slate-400 text-center leading-relaxed">
+                {isZh ? 'AI 为您精准匹配全球供应商' : 'AI precisely matches global suppliers for you'}
+              </span>
+              <span className="text-xs font-semibold text-violet-400 flex items-center gap-1">
+                {isZh ? '发布采购' : 'Post RFQ'}
+                <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+
+            <a
+              href={`/${locale}/opportunities`}
+              className="group flex flex-col items-center gap-3 p-7 rounded-2xl border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-1"
+            >
+              <span className="text-4xl group-hover:scale-110 transition-transform">🌐</span>
+              <span className="font-bold text-white text-base">{isZh ? '浏览商机' : 'Browse Opportunities'}</span>
+              <span className="text-xs text-slate-400 text-center leading-relaxed">
+                {isZh ? 'AI 实时更新全球供需商机池' : 'Real-time AI-curated global opportunity pool'}
+              </span>
+              <span className="text-xs font-semibold text-amber-400 flex items-center gap-1">
+                {isZh ? '查看商机' : 'Explore'}
+                <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          {/* Primary CTA */}
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href={`/${locale}/onboarding`}
-              className="group inline-flex items-center gap-2 px-10 py-4 bg-[#0f172a] hover:bg-slate-800 text-white font-bold rounded-xl transition-all shadow-2xl shadow-amber-700/40 hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 px-10 py-4 bg-amber-500 hover:bg-amber-400 text-[#070e1f] font-bold text-lg rounded-xl transition-all shadow-xl shadow-amber-500/25 hover:-translate-y-0.5 hover:shadow-amber-500/40"
             >
               {t.cta.primary}
               <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -966,14 +1041,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               </svg>
             </a>
             <a
-              href={`/${locale}/supply`}
-              className="inline-flex items-center gap-2 px-10 py-4 bg-white/20 hover:bg-white/30 text-[#0f172a] font-bold rounded-xl transition-all border border-[#0f172a]/20 hover:-translate-y-0.5"
+              href={`/${locale}/opportunities`}
+              className="inline-flex items-center gap-2 px-10 py-4 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-bold rounded-xl transition-all hover:-translate-y-0.5"
             >
               {t.cta.secondary}
             </a>
           </div>
         </div>
       </section>
+
+      {/* ── Enterprise Stats ── */}
+      <EnterpriseStats isZh={isZh} />
 
       {/* ── Footer ── */}
       <footer className="bg-[#070e1f] border-t border-slate-800/80">

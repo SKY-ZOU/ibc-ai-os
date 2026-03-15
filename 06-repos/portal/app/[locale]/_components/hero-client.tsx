@@ -85,7 +85,7 @@ export default function HeroClient({ locale, t }: { locale: string, t: any }) {
           </motion.a>
           <motion.a
             whileHover={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.4)" }}
-            href={`/${locale}/supply`}
+            href={`/${locale}/opportunities`}
             className="inline-flex items-center gap-4 px-14 py-6 border border-white/20 bg-white/5 backdrop-blur-2xl text-white text-xl font-black rounded-[2rem] transition-all"
           >
             {t.hero.ctaSecondary}
