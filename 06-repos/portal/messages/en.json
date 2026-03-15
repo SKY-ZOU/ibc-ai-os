@@ -1,0 +1,195 @@
+{
+  "Home": {
+    "nav": {
+      "platform": "Platform",
+      "features": "Features",
+      "howItWorks": "How It Works",
+      "join": "Join Now"
+    },
+    "hero": {
+      "badge": "AI-Powered · Globally Connected · China Hub",
+      "title": "Global Cross-border Barter Trade",
+      "titleHighlight": "AI Operating System",
+      "subtitle": "China as the core trading hub, connecting global buyers and sellers. AI-assisted matching, pricing, and negotiation — reducing USD dependency and closing the trade fulfillment loop.",
+      "ctaPrimary": "Enterprise Onboarding",
+      "ctaSupply": "Post Supply",
+      "ctaDemand": "Post Demand",
+      "stat1Value": "50+",
+      "stat1Label": "Countries & Regions",
+      "stat2Value": "AI",
+      "stat2Label": "Smart Matching Engine",
+      "stat3Value": "End-to-end",
+      "stat3Label": "Trade Fulfillment"
+    },
+    "features": {
+      "title": "Six Core Capabilities",
+      "subtitle": "AI drives every step from attraction to deal closure",
+      "f1Icon": "🌐", "f1Title": "Global Attraction", "f1Desc": "Multilingual portal that draws global partners who want to trade with China",
+      "f2Icon": "🤖", "f2Title": "AI Smart Matching", "f2Desc": "Enterprise profiles and product tags power real-time AI supply-demand matching",
+      "f3Icon": "💰", "f3Title": "AI Pricing & Valuation", "f3Desc": "AI-assisted commodity pricing and cargo valuation to reduce information asymmetry",
+      "f4Icon": "🤝", "f4Title": "AI Negotiation", "f4Desc": "Intelligent negotiation strategies auto-advance conversations to deal confirmation",
+      "f5Icon": "💱", "f5Title": "Multi-currency Settlement", "f5Desc": "Reduce USD dependency with RMB, multi-currency, and stablecoin settlement options",
+      "f6Icon": "📋", "f6Title": "Fulfillment Loop", "f6Desc": "Orders, contracts, documents, and supply chain finance — all in one integrated platform"
+    },
+    "howItWorks": {
+      "title": "Three Steps to Global Trade",
+      "s1Num": "01", "s1Title": "Onboard", "s1Desc": "Complete enterprise verification, build your trade profile, gain global visibility",
+      "s2Num": "02", "s2Title": "Post Supply / Demand", "s2Desc": "Post products or procurement needs — AI generates your profile and recommends matches",
+      "s3Num": "03", "s3Title": "AI-Driven Deal Closure", "s3Desc": "AI advances negotiations, generates quotes, signs contracts, and completes settlement"
+    },
+    "roles": {
+      "title": "Who Is This For",
+      "r1Icon": "🏭", "r1Title": "Chinese Manufacturers", "r1Desc": "Expand export channels and connect with global buyers",
+      "r2Icon": "🌍", "r2Title": "Overseas Suppliers", "r2Desc": "Enter the China market and find reliable partners",
+      "r3Icon": "🛒", "r3Title": "Overseas Buyers", "r3Desc": "Source quality Chinese products with simplified cross-border processes",
+      "r4Icon": "🏢", "r4Title": "Traders & Intermediaries", "r4Desc": "Broker multi-party deals with full platform support"
+    },
+    "cta": {
+      "title": "Join IBC AI Trade OS Today",
+      "subtitle": "Step into the next era of AI-powered global trade",
+      "button": "Get Started Free"
+    },
+    "footer": {
+      "powered": "Powered by IBC AI Trade OS",
+      "lang": "Language"
+    }
+  },
+  "Nav": {
+    "home": "Home",
+    "products": "Products",
+    "demands": "Demands",
+    "about": "About"
+  },
+  "EntryNav": {
+    "home": "Home",
+    "onboarding": "Onboarding",
+    "supply": "Supply",
+    "demand": "Demand"
+  },
+  "OnboardingPage": {
+    "title": "Enterprise Onboarding",
+    "description": "Submit core company details to create an enterprise record.",
+    "submit": "Submit Enterprise",
+    "submitLoading": "Submitting...",
+    "messages": {
+      "submitSuccess": "Submission successful",
+      "submitFailed": "Submission failed, please try again later",
+      "recordId": "Record ID"
+    },
+    "placeholders": {
+      "tradeDirection": "Select trade direction"
+    },
+    "options": {
+      "tradeDirection": {
+        "export": "Export",
+        "import": "Import",
+        "both": "Both"
+      }
+    },
+    "fields": {
+      "name": "Company Name",
+      "nameEn": "English Name",
+      "industry": "Industry",
+      "country": "Country",
+      "city": "City",
+      "email": "Email",
+      "phone": "Phone",
+      "contactName": "Contact Name",
+      "website": "Website",
+      "paymentPreference": "Payment Preference",
+      "tradeDirection": "Trade Direction",
+      "description": "Description"
+    }
+  },
+  "SupplyPage": {
+    "title": "Supply Posting",
+    "description": "Submit supply data to create a Product record.",
+    "submit": "Submit Supply",
+    "submitLoading": "Submitting...",
+    "messages": {
+      "submitSuccess": "Submission successful",
+      "submitFailed": "Submission failed, please try again later",
+      "recordId": "Record ID"
+    },
+    "fields": {
+      "enterpriseId": "Enterprise ID",
+      "name": "Product Name",
+      "category": "Category",
+      "description": "Description",
+      "priceMin": "Minimum Price",
+      "priceMax": "Maximum Price",
+      "currency": "Currency",
+      "unit": "Unit",
+      "minQty": "Minimum Quantity",
+      "leadTime": "Lead Time (Days)",
+      "hsCode": "HS Code",
+      "origin": "Origin"
+    }
+  },
+  "MatchPage": {
+    "title": "AI Match Engine",
+    "subtitle": "AI-powered matching from the global supply-demand pool — match scores visualized 0-100",
+    "filterTitle": "Filter Criteria",
+    "category": "Category",
+    "country": "Country/Region",
+    "countryPlaceholder": "Enter country name",
+    "type": "Type",
+    "keyword": "Keyword",
+    "keywordPlaceholder": "Company, product, tag...",
+    "typeAll": "All",
+    "typeSupply": "Supply",
+    "typeDemand": "Demand",
+    "search": "AI Match",
+    "searching": "Matching...",
+    "supply": "Supply",
+    "demand": "Demand",
+    "aiScore": "AI Match Score",
+    "excellent": "Excellent",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "resultsCount": "Found {count} matching results",
+    "searchHint": "Click search to get AI match results",
+    "emptyTitle": "No matching results found",
+    "emptyHint": "Try adjusting your filters or keywords",
+    "initialTitle": "Set filters to start AI matching",
+    "initialHint": "AI will find the best matches from the global pool",
+    "error": "Failed to fetch results, please try again",
+    "categories": {
+      "all": "All Categories",
+      "energy": "Energy & Mining",
+      "agriculture": "Agriculture & Food",
+      "machinery": "Machinery",
+      "electronics": "Electronics & Tech",
+      "chemicals": "Chemicals",
+      "textiles": "Textiles & Apparel",
+      "metals": "Metals & Materials",
+      "food": "Food & Beverage"
+    }
+  },
+  "DemandPage": {
+    "title": "Demand Posting",
+    "description": "Submit demand data to create a Demand record.",
+    "submit": "Submit Demand",
+    "submitLoading": "Submitting...",
+    "messages": {
+      "submitSuccess": "Submission successful",
+      "submitFailed": "Submission failed, please try again later",
+      "recordId": "Record ID"
+    },
+    "fields": {
+      "enterpriseId": "Enterprise ID",
+      "title": "Demand Title",
+      "category": "Category",
+      "description": "Description",
+      "budgetMin": "Minimum Budget",
+      "budgetMax": "Maximum Budget",
+      "currency": "Currency",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "deliveryLocation": "Delivery Location",
+      "paymentPreference": "Payment Preference",
+      "acceptAlternative": "Accept Alternatives"
+    }
+  }
+}

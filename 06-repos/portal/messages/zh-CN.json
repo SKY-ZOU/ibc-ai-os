@@ -1,0 +1,195 @@
+{
+  "Home": {
+    "nav": {
+      "platform": "平台介绍",
+      "features": "核心能力",
+      "howItWorks": "流程",
+      "join": "立即入驻"
+    },
+    "hero": {
+      "badge": "AI 驱动 · 全球互联 · 中国枢纽",
+      "title": "全球跨境易货贸易",
+      "titleHighlight": "AI 操作系统",
+      "subtitle": "以中国为核心交易枢纽，连接全球供需双方。AI 辅助匹配、定价、谈判，降低美元依赖，打通履约与结算闭环。",
+      "ctaPrimary": "企业入驻",
+      "ctaSupply": "发布供给",
+      "ctaDemand": "发布需求",
+      "stat1Value": "50+",
+      "stat1Label": "覆盖国家与地区",
+      "stat2Value": "AI",
+      "stat2Label": "智能撮合引擎",
+      "stat3Value": "全链路",
+      "stat3Label": "贸易履约闭环"
+    },
+    "features": {
+      "title": "六大核心能力",
+      "subtitle": "从招引到成交，AI 驱动每一个环节",
+      "f1Icon": "🌐", "f1Title": "全球招引", "f1Desc": "多语言国际门户，精准吸引想与中国交易的全球合作伙伴",
+      "f2Icon": "🤖", "f2Title": "AI 智能匹配", "f2Desc": "基于企业画像与商品标签，AI 实时撮合全球供需双方",
+      "f3Icon": "💰", "f3Title": "AI 定价验值", "f3Desc": "AI 辅助大宗商品定价，货值验证，降低信息不对称摩擦",
+      "f4Icon": "🤝", "f4Title": "AI 谈判推进", "f4Desc": "智能生成谈判策略，自动推进意向对话直至成交确认",
+      "f5Icon": "💱", "f5Title": "多元结算", "f5Desc": "降低美元依赖，支持人民币、多币种及稳定币结算",
+      "f6Icon": "📋", "f6Title": "履约闭环", "f6Desc": "订单、合同、单证、供应链金融全链路一体化管理"
+    },
+    "howItWorks": {
+      "title": "三步开启全球贸易",
+      "s1Num": "01", "s1Title": "企业入驻", "s1Desc": "完成企业认证，建立贸易档案，获取全球可见度",
+      "s2Num": "02", "s2Title": "发布供需", "s2Desc": "发布供给产品或采购需求，AI 自动生成画像并推荐匹配方",
+      "s3Num": "03", "s3Title": "AI 撮合成交", "s3Desc": "AI 推进谈判、生成报价、签署合同，完成履约与结算"
+    },
+    "roles": {
+      "title": "适合哪些企业",
+      "r1Icon": "🏭", "r1Title": "中国制造商", "r1Desc": "扩大出口渠道，对接全球买家",
+      "r2Icon": "🌍", "r2Title": "海外供应商", "r2Desc": "进入中国市场，寻找可靠合作伙伴",
+      "r3Icon": "🛒", "r3Title": "海外采购商", "r3Desc": "采购中国优质产品，简化跨境流程",
+      "r4Icon": "🏢", "r4Title": "贸易商/中间商", "r4Desc": "撮合多方交易，获取平台支持"
+    },
+    "cta": {
+      "title": "立即加入 IBC AI Trade OS",
+      "subtitle": "开启 AI 驱动的全球贸易新时代",
+      "button": "免费入驻"
+    },
+    "footer": {
+      "powered": "Powered by IBC AI Trade OS",
+      "lang": "语言"
+    }
+  },
+  "Nav": {
+    "home": "首页",
+    "products": "产品",
+    "demands": "需求",
+    "about": "关于"
+  },
+  "EntryNav": {
+    "home": "首页",
+    "onboarding": "企业入驻",
+    "supply": "供给发布",
+    "demand": "需求发布"
+  },
+  "OnboardingPage": {
+    "title": "企业入驻",
+    "description": "填写企业基础信息并提交，系统将创建企业档案。",
+    "submit": "提交入驻信息",
+    "submitLoading": "提交中...",
+    "messages": {
+      "submitSuccess": "提交成功",
+      "submitFailed": "提交失败，请稍后重试",
+      "recordId": "记录ID"
+    },
+    "placeholders": {
+      "tradeDirection": "请选择贸易方向"
+    },
+    "options": {
+      "tradeDirection": {
+        "export": "出口",
+        "import": "进口",
+        "both": "双向"
+      }
+    },
+    "fields": {
+      "name": "企业名称",
+      "nameEn": "英文名称",
+      "industry": "行业",
+      "country": "国家",
+      "city": "城市",
+      "email": "邮箱",
+      "phone": "电话",
+      "contactName": "联系人",
+      "website": "官网",
+      "paymentPreference": "支付偏好",
+      "tradeDirection": "贸易方向",
+      "description": "企业简介"
+    }
+  },
+  "SupplyPage": {
+    "title": "供给发布",
+    "description": "填写可供交易的产品信息并提交到 Product 表。",
+    "submit": "提交供给",
+    "submitLoading": "提交中...",
+    "messages": {
+      "submitSuccess": "提交成功",
+      "submitFailed": "提交失败，请稍后重试",
+      "recordId": "记录ID"
+    },
+    "fields": {
+      "enterpriseId": "企业ID",
+      "name": "产品名称",
+      "category": "分类",
+      "description": "描述",
+      "priceMin": "最低价格",
+      "priceMax": "最高价格",
+      "currency": "币种",
+      "unit": "单位",
+      "minQty": "最小起订量",
+      "leadTime": "交期（天）",
+      "hsCode": "HS Code",
+      "origin": "原产地"
+    }
+  },
+  "MatchPage": {
+    "title": "AI 商机匹配引擎",
+    "subtitle": "基于 AI 算法，从全球供需池中精准匹配最优贸易机会，匹配度 0-100 可视化",
+    "filterTitle": "筛选条件",
+    "category": "品类",
+    "country": "国家/地区",
+    "countryPlaceholder": "输入国家名称",
+    "type": "供需类型",
+    "keyword": "关键词",
+    "keywordPlaceholder": "企业、商品、标签...",
+    "typeAll": "全部",
+    "typeSupply": "供给",
+    "typeDemand": "需求",
+    "search": "AI 匹配",
+    "searching": "AI 匹配中...",
+    "supply": "供给",
+    "demand": "需求",
+    "aiScore": "AI 匹配度",
+    "excellent": "极高匹配",
+    "high": "高度匹配",
+    "medium": "中等匹配",
+    "low": "一般匹配",
+    "resultsCount": "共找到 {count} 条匹配结果",
+    "searchHint": "点击搜索获取 AI 匹配结果",
+    "emptyTitle": "未找到匹配结果",
+    "emptyHint": "尝试调整筛选条件或关键词",
+    "initialTitle": "设置筛选条件后开始 AI 匹配",
+    "initialHint": "AI 将从全球供需池中找到最佳匹配",
+    "error": "获取数据失败，请重试",
+    "categories": {
+      "all": "全部品类",
+      "energy": "能源矿产",
+      "agriculture": "农业食品",
+      "machinery": "机械设备",
+      "electronics": "电子科技",
+      "chemicals": "化工原料",
+      "textiles": "纺织服装",
+      "metals": "金属材料",
+      "food": "食品饮料"
+    }
+  },
+  "DemandPage": {
+    "title": "需求发布",
+    "description": "填写采购需求并提交到 Demand 表。",
+    "submit": "提交需求",
+    "submitLoading": "提交中...",
+    "messages": {
+      "submitSuccess": "提交成功",
+      "submitFailed": "提交失败，请稍后重试",
+      "recordId": "记录ID"
+    },
+    "fields": {
+      "enterpriseId": "企业ID",
+      "title": "需求标题",
+      "category": "分类",
+      "description": "描述",
+      "budgetMin": "最低预算",
+      "budgetMax": "最高预算",
+      "currency": "币种",
+      "quantity": "数量",
+      "unit": "单位",
+      "deliveryLocation": "交付地点",
+      "paymentPreference": "支付偏好",
+      "acceptAlternative": "接受替代品"
+    }
+  }
+}

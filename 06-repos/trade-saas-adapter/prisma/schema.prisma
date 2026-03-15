@@ -1,0 +1,165 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// 订单模块 (Order)
+// ============================================================
+
+model Order {
+  id             String      @id @default(cuid())
+  orderNo        String      @unique
+  enterpriseId   String
+  enterpriseName String
+  productId      String?
+  productName    String?
+  quantity       Float?
+  unit           String?
+  unitPrice      Float?
+  totalAmount    Float?
+  currency       String      @default("USD")
+  status         String      @default("pending") // pending | confirmed | shipped | completed | cancelled
+  notes          String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  items          OrderItem[]
+  contracts      Contract[]
+  documents      Document[]
+  fulfillments   Fulfillment[]
+  scfApplications SCFApplication[]
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  name        String
+  hsCode      String?
+  quantity    Float
+  unit        String
+  unitPrice   Float
+  totalPrice  Float
+  currency    String   @default("USD")
+  createdAt   DateTime @default(now())
+
+  order       Order    @relation(fields: [orderId], references: [id])
+}
+
+// ============================================================
+// 合同模块 (Contract)
+// ============================================================
+
+model Contract {
+  id           String           @id @default(cuid())
+  contractNo   String           @unique
+  orderId      String
+  templateId   String?
+  title        String
+  partyA       String
+  partyB       String
+  amount       Float?
+  currency     String           @default("USD")
+  signStatus   String           @default("draft") // draft | pending | signed | expired
+  signedAt     DateTime?
+  expiresAt    DateTime?
+  fileUrl      String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  order        Order            @relation(fields: [orderId], references: [id])
+  clauses      ContractClause[]
+}
+
+model ContractClause {
+  id         String   @id @default(cuid())
+  contractId String
+  section    String
+  content    String
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  contract   Contract @relation(fields: [contractId], references: [id])
+}
+
+// ============================================================
+// 单证模块 (Document)
+// ============================================================
+
+model Document {
+  id           String   @id @default(cuid())
+  orderId      String
+  type         String   // bill_of_lading | invoice | packing_list | certificate_of_origin | other
+  docNo        String?
+  title        String
+  fileUrl      String?
+  issueDate    DateTime?
+  status       String   @default("draft") // draft | issued | verified
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  order        Order    @relation(fields: [orderId], references: [id])
+}
+
+// ============================================================
+// 履约模块 (Fulfillment)
+// ============================================================
+
+model Fulfillment {
+  id              String             @id @default(cuid())
+  orderId         String
+  type            String             // shipment | receipt | inspection
+  status          String             @default("pending") // pending | in_transit | delivered | accepted | rejected
+  shipDate        DateTime?
+  receiveDate     DateTime?
+  carrier         String?
+  trackingNo      String?
+  warehouseId     String?
+  notes           String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  order           Order              @relation(fields: [orderId], references: [id])
+  events          FulfillmentEvent[]
+}
+
+model FulfillmentEvent {
+  id            String      @id @default(cuid())
+  fulfillmentId String
+  eventType     String      // departed | arrived | customs_cleared | delivered
+  location      String?
+  description   String?
+  occurredAt    DateTime    @default(now())
+
+  fulfillment   Fulfillment @relation(fields: [fulfillmentId], references: [id])
+}
+
+// ============================================================
+// 供链金融模块 (SupplyChainFinance)
+// ============================================================
+
+model SCFApplication {
+  id              String   @id @default(cuid())
+  appNo           String   @unique
+  orderId         String
+  enterpriseId    String
+  enterpriseName  String
+  type            String   // factoring | po_finance | warehouse_receipt
+  amount          Float
+  currency        String   @default("USD")
+  purpose         String?
+  repaymentDate   DateTime?
+  status          String   @default("submitted") // submitted | under_review | approved | rejected | repaid
+  approvedAt      DateTime?
+  rejectedReason  String?
+  repaidAt        DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  order           Order    @relation(fields: [orderId], references: [id])
+}

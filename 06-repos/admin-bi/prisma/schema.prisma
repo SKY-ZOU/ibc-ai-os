@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Phase 1 — 复用 portal 的 schema，不新增
+
+model Enterprise {
+  id                String   @id @default(cuid())
+  name              String
+  nameEn            String?
+  industry          String?
+  country           String
+  city              String?
+  email             String?
+  phone             String?
+  contactName       String?
+  description       String?
+  website           String?
+  logo              String?
+  paymentPreference String?
+  tradeDirection    String?
+  status            String   @default("pending")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  products      Product[]
+  demands       Demand[]
+  opportunities Opportunity[]
+}
+
+model Product {
+  id           String   @id @default(cuid())
+  enterpriseId String
+  name         String
+  nameEn       String?
+  category     String
+  hsCode       String?
+  origin       String?
+  description  String?
+  priceMin     Float?
+  priceMax     Float?
+  currency     String   @default("USD")
+  unit         String?
+  minQty       Int?
+  maxQty       Int?
+  leadTime     Int?
+  images       String?
+  status       String   @default("active")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  enterprise Enterprise         @relation(fields: [enterpriseId], references: [id])
+  matches    OpportunityMatch[]
+}
+
+model Demand {
+  id                   String    @id @default(cuid())
+  enterpriseId         String
+  title                String
+  titleEn              String?
+  category             String
+  description          String?
+  budgetMin            Float?
+  budgetMax            Float?
+  currency             String    @default("USD")
+  quantity             Int?
+  unit                 String?
+  deliveryLocation     String?
+  expectedDeliveryDate DateTime?
+  paymentPreference    String?
+  acceptAlternative    Boolean   @default(false)
+  status               String    @default("open")
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  enterprise Enterprise         @relation(fields: [enterpriseId], references: [id])
+  matches    OpportunityMatch[]
+}
+
+model Opportunity {
+  id           String    @id @default(cuid())
+  enterpriseId String
+  title        String
+  description  String?
+  stage        String    @default("new")
+  value        Float?
+  currency     String    @default("USD")
+  probability  Int       @default(10)
+  closedAt     DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  enterprise Enterprise         @relation(fields: [enterpriseId], references: [id])
+  matches    OpportunityMatch[]
+}
+
+model OpportunityMatch {
+  id            String   @id @default(cuid())
+  opportunityId String
+  productId     String?
+  demandId      String?
+  matchScore    Float
+  matchReason   String?
+  status        String   @default("pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id])
+  product     Product?    @relation(fields: [productId], references: [id])
+  demand      Demand?     @relation(fields: [demandId], references: [id])
+}

@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env
+.env.local
+*.db
+*.db-journal
+prisma/dev.db
+06-repos/*/node_modules/
+06-repos/*/.next/
+06-repos/*/.env
+06-repos/*/.env.local
+06-repos/*/prisma/*.db

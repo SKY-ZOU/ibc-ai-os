@@ -1,0 +1,67 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 企业画像
+model EnterpriseProfile {
+  id             String   @id @default(cuid())
+  enterpriseId   String   @unique
+  name           String
+  industry       String?
+  country        String?
+  tags           String   // JSON array stored as string
+  enterpriseType String
+  tradeDirection String
+  riskLevel      String
+  creditScore    Float    @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// 匹配记录
+model MatchRecord {
+  id         String   @id @default(cuid())
+  sourceId   String
+  targetId   String
+  category   String
+  direction  String
+  score      Float
+  reason     String?
+  recommended Boolean @default(false)
+  createdAt  DateTime @default(now())
+}
+
+// 定价记录
+model PricingRecord {
+  id           String   @id @default(cuid())
+  enterpriseId String
+  category     String
+  quantity     Float?
+  unit         String?
+  currency     String   @default("CNY")
+  suggestedMin Float?
+  suggestedMax Float?
+  validated    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
+
+// 商机
+model DealOpportunity {
+  id           String    @id @default(cuid())
+  enterpriseId String
+  title        String
+  stage        String    @default("new") // new | negotiating | closed_won | closed_lost
+  value        Float?
+  currency     String    @default("CNY")
+  probability  Int       @default(10)
+  lastPushedAt DateTime?
+  closedAt     DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
