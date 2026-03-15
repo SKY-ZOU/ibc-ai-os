@@ -2,6 +2,7 @@ import HeroClient from './_components/hero-client'
 import FeaturesClient from './_components/features-client'
 import ParticleBackground from './_components/particle-background'
 import CountryPavilionClient from './_components/country-pavilion-client'
+import GlobeSection from './_components/globe-section'
 
 
 
@@ -663,6 +664,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
         </div>
       </section>
+
+      {/* ── 3D Globe — China Trade Network ── */}
+      <GlobeSection isZh={isZh} />
 
       {/* ── Solutions ── */}
       <SolutionsSection

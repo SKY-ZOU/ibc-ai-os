@@ -15,6 +15,7 @@ package = "@netlify/plugin-nextjs"
 publish = "/Volumes/imac/开发项目/IBC-AI-TRADE-OS/06-repos/portal/.next"
 publishOrigin = "config"
 commandOrigin = "config"
+base = "/Volumes/imac/开发项目/IBC-AI-TRADE-OS/06-repos/portal"
 command = "prisma generate && next build"
 
 [build.environment]

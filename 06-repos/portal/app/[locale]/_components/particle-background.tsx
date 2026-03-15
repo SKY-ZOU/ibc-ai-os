@@ -35,10 +35,12 @@ export default function ParticleBackground() {
       distance: number
       friction: number
       ease: number
+      canvas: HTMLCanvasElement
 
-      constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+      constructor(canvasEl: HTMLCanvasElement) {
+        this.canvas = canvasEl
+        this.x = Math.random() * canvasEl.width
+        this.y = Math.random() * canvasEl.height
         this.originX = this.x
         this.originY = this.y
         this.size = Math.random() * 2 + 1
@@ -54,8 +56,8 @@ export default function ParticleBackground() {
 
       update() {
         // 1. 自动流向中心 (象征资源汇聚到中国枢纽)
-        const centerX = canvas.width / 2
-        const centerY = canvas.height / 2
+        const centerX = this.canvas.width / 2
+        const centerY = this.canvas.height / 2
         const dxCenter = centerX - this.x
         const dyCenter = centerY - this.y
         const distCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter)
@@ -84,10 +86,10 @@ export default function ParticleBackground() {
         this.vy *= this.friction
 
         // 边界循环
-        if (this.x < 0) this.x = canvas.width
-        if (this.x > canvas.width) this.x = 0
-        if (this.y < 0) this.y = canvas.height
-        if (this.y > canvas.height) this.y = 0
+        if (this.x < 0) this.x = this.canvas.width
+        if (this.x > this.canvas.width) this.x = 0
+        if (this.y < 0) this.y = this.canvas.height
+        if (this.y > this.canvas.height) this.y = 0
       }
 
       draw() {
@@ -103,7 +105,7 @@ export default function ParticleBackground() {
       particles = []
       const particleCount = Math.min(window.innerWidth / 10, 150) // 动态粒子数量
       for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle())
+        particles.push(new Particle(canvas))
       }
     }
 
