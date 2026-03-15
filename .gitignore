@@ -11,5 +11,7 @@ prisma/dev.db
 06-repos/*/.env.local
 06-repos/*/prisma/*.db
 06-repos/portal/.netlify/deploy/
+06-repos/portal/.netlify/edge-functions/
+06-repos/portal/.netlify/functions-internal/
 06-repos/portal/.next/
 06-repos/portal/node_modules/
