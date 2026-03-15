@@ -8,21 +8,21 @@ const Globe = dynamic(() => import('react-globe.gl'), { ssr: false })
 const CHINA = { lat: 35, lng: 105 }
 
 const PARTNERS = [
-  { lat: 51.5,  lng: -0.1,   label: '伦敦',   en: 'London',    region: isZh => isZh ? '欧洲' : 'Europe',     color: '#60a5fa', commodity: '金融服务' },
-  { lat: 48.9,  lng: 2.3,    label: '巴黎',   en: 'Paris',     region: isZh => isZh ? '欧洲' : 'Europe',     color: '#60a5fa', commodity: '奢侈品' },
-  { lat: 52.5,  lng: 13.4,   label: '柏林',   en: 'Berlin',    region: isZh => isZh ? '欧洲' : 'Europe',     color: '#60a5fa', commodity: '机械设备' },
-  { lat: 40.7,  lng: -74.0,  label: '纽约',   en: 'New York',  region: isZh => isZh ? '北美' : 'N.America',  color: '#a78bfa', commodity: '金融' },
-  { lat: 34.0,  lng: -118,   label: '洛杉矶', en: 'Los Angeles',region: isZh => isZh ? '北美' : 'N.America', color: '#a78bfa', commodity: '科技' },
-  { lat: -23.5, lng: -46.6,  label: '圣保罗', en: 'São Paulo', region: isZh => isZh ? '南美' : 'S.America',  color: '#34d399', commodity: '大豆·铁矿' },
-  { lat: -33.9, lng: 18.4,   label: '开普敦', en: 'Cape Town', region: isZh => isZh ? '非洲' : 'Africa',    color: '#fb923c', commodity: '矿产资源' },
-  { lat: 6.5,   lng: 3.4,    label: '拉各斯', en: 'Lagos',     region: isZh => isZh ? '非洲' : 'Africa',    color: '#fb923c', commodity: '石油' },
-  { lat: 25.2,  lng: 55.3,   label: '迪拜',   en: 'Dubai',     region: isZh => isZh ? '中东' : 'M.East',    color: '#f472b6', commodity: '能源·黄金' },
-  { lat: 24.7,  lng: 46.7,   label: '利雅得', en: 'Riyadh',   region: isZh => isZh ? '中东' : 'M.East',    color: '#f472b6', commodity: '石油' },
-  { lat: 19.1,  lng: 72.9,   label: '孟买',   en: 'Mumbai',   region: isZh => isZh ? '南亚' : 'S.Asia',    color: '#fbbf24', commodity: '纺织品' },
-  { lat: 13.8,  lng: 100.5,  label: '曼谷',   en: 'Bangkok',  region: isZh => isZh ? '东南亚' : 'SE Asia',  color: '#4ade80', commodity: '农产品' },
-  { lat: 1.35,  lng: 103.8,  label: '新加坡', en: 'Singapore',region: isZh => isZh ? '东南亚' : 'SE Asia',  color: '#4ade80', commodity: '金融·贸易' },
-  { lat: -6.2,  lng: 106.8,  label: '雅加达', en: 'Jakarta',  region: isZh => isZh ? '东南亚' : 'SE Asia',  color: '#4ade80', commodity: '棕榈油' },
-  { lat: -33.9, lng: 151.2,  label: '悉尼',   en: 'Sydney',   region: isZh => isZh ? '大洋洲' : 'Oceania',  color: '#e879f9', commodity: '铁矿石' },
+  { lat: 51.5,  lng: -0.1,   label: '伦敦',   en: 'London',     region: '欧洲',   regionEn: 'Europe',    color: '#60a5fa', commodity: '金融服务' },
+  { lat: 48.9,  lng: 2.3,    label: '巴黎',   en: 'Paris',      region: '欧洲',   regionEn: 'Europe',    color: '#60a5fa', commodity: '奢侈品' },
+  { lat: 52.5,  lng: 13.4,   label: '柏林',   en: 'Berlin',     region: '欧洲',   regionEn: 'Europe',    color: '#60a5fa', commodity: '机械设备' },
+  { lat: 40.7,  lng: -74.0,  label: '纽约',   en: 'New York',   region: '北美',   regionEn: 'N.America', color: '#a78bfa', commodity: '金融' },
+  { lat: 34.0,  lng: -118,   label: '洛杉矶', en: 'Los Angeles',region: '北美',   regionEn: 'N.America', color: '#a78bfa', commodity: '科技' },
+  { lat: -23.5, lng: -46.6,  label: '圣保罗', en: 'São Paulo',  region: '南美',   regionEn: 'S.America', color: '#34d399', commodity: '大豆·铁矿' },
+  { lat: -33.9, lng: 18.4,   label: '开普敦', en: 'Cape Town',  region: '非洲',   regionEn: 'Africa',    color: '#fb923c', commodity: '矿产资源' },
+  { lat: 6.5,   lng: 3.4,    label: '拉各斯', en: 'Lagos',      region: '非洲',   regionEn: 'Africa',    color: '#fb923c', commodity: '石油' },
+  { lat: 25.2,  lng: 55.3,   label: '迪拜',   en: 'Dubai',      region: '中东',   regionEn: 'M.East',    color: '#f472b6', commodity: '能源·黄金' },
+  { lat: 24.7,  lng: 46.7,   label: '利雅得', en: 'Riyadh',     region: '中东',   regionEn: 'M.East',    color: '#f472b6', commodity: '石油' },
+  { lat: 19.1,  lng: 72.9,   label: '孟买',   en: 'Mumbai',     region: '南亚',   regionEn: 'S.Asia',    color: '#fbbf24', commodity: '纺织品' },
+  { lat: 13.8,  lng: 100.5,  label: '曼谷',   en: 'Bangkok',    region: '东南亚', regionEn: 'SE Asia',   color: '#4ade80', commodity: '农产品' },
+  { lat: 1.35,  lng: 103.8,  label: '新加坡', en: 'Singapore',  region: '东南亚', regionEn: 'SE Asia',   color: '#4ade80', commodity: '金融·贸易' },
+  { lat: -6.2,  lng: 106.8,  label: '雅加达', en: 'Jakarta',    region: '东南亚', regionEn: 'SE Asia',   color: '#4ade80', commodity: '棕榈油' },
+  { lat: -33.9, lng: 151.2,  label: '悉尼',   en: 'Sydney',     region: '大洋洲', regionEn: 'Oceania',   color: '#e879f9', commodity: '铁矿石' },
 ]
 
 const AI_STEPS = (isZh: boolean) => [
@@ -211,7 +211,7 @@ export default function GlobeSection({ isZh }: Props) {
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="bg-white/5 rounded-lg px-3 py-2">
                     <div className="text-slate-500 mb-0.5">{isZh ? '区域' : 'Region'}</div>
-                    <div className="text-white font-semibold">{partner.region(isZh)}</div>
+                    <div className="text-white font-semibold">{isZh ? partner.region : partner.regionEn}</div>
                   </div>
                   <div className="bg-white/5 rounded-lg px-3 py-2">
                     <div className="text-slate-500 mb-0.5">{isZh ? '品类' : 'Category'}</div>
