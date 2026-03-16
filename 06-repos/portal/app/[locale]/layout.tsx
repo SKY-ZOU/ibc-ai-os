@@ -1,11 +1,19 @@
 import '../globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
 import { routing } from '@/app/routing'
 
 export const metadata: Metadata = {
   title: 'IBC AI Trade OS - Global Cross-border AI Barter Trading Platform',
   description: 'AI-powered global trade platform connecting enterprises worldwide',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#020617',
 }
 
 export function generateStaticParams() {
