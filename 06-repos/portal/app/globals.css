@@ -1,15 +1,5 @@
 @import "tailwindcss";
 
-/*
- * 强制深色背景 — 保底规则，无论 Tailwind 颜色系统是否正常工作
- * 用 hex 直接设置，不依赖 CSS 变量
- */
-html, body {
-  background-color: #020617 !important;
-  color: #f8fafc !important;
-  min-height: 100%;
-}
-
 @theme {
   --color-brand-indigo: #6366f1;
   --color-brand-violet: #8b5cf6;
@@ -18,70 +8,90 @@ html, body {
 }
 
 /*
- * WeChat X5 / 旧版 WebView 不支持 oklch()
- * 用 @supports 为不支持 oklch 的环境覆盖 Tailwind v4 颜色变量为 hex fallback
+ * 全量 hex 颜色覆盖 — 无条件应用，优先级高于 Tailwind v4 @layer theme 中的 oklch 值
+ * 解决微信/旧版 WebView 中 oklch() 渲染异常导致颜色全部失效的问题
  */
-@supports not (color: oklch(0 0 0)) {
-  :root {
-    --color-slate-50:   #f8fafc;
-    --color-slate-100:  #f1f5f9;
-    --color-slate-200:  #e2e8f0;
-    --color-slate-300:  #cbd5e1;
-    --color-slate-400:  #94a3b8;
-    --color-slate-500:  #64748b;
-    --color-slate-600:  #475569;
-    --color-slate-700:  #334155;
-    --color-slate-800:  #1e293b;
-    --color-slate-900:  #0f172a;
-    --color-slate-950:  #020617;
-    --color-white:      #ffffff;
-    --color-black:      #000000;
-    --color-amber-300:  #fcd34d;
-    --color-amber-400:  #fbbf24;
-    --color-amber-500:  #f59e0b;
-    --color-amber-600:  #d97706;
-    --color-indigo-400: #818cf8;
-    --color-indigo-500: #6366f1;
-    --color-indigo-600: #4f46e5;
-    --color-violet-400: #a78bfa;
-    --color-violet-500: #8b5cf6;
-    --color-violet-600: #7c3aed;
-    --color-emerald-400:#34d399;
-    --color-emerald-500:#10b981;
-    --color-rose-400:   #fb7185;
-    --color-rose-500:   #f43f5e;
-    --color-blue-400:   #60a5fa;
-    --color-blue-500:   #3b82f6;
-  }
-}
-
 :root {
+  /* Slate */
+  --color-slate-50:   #f8fafc;
+  --color-slate-100:  #f1f5f9;
+  --color-slate-200:  #e2e8f0;
+  --color-slate-300:  #cbd5e1;
+  --color-slate-400:  #94a3b8;
+  --color-slate-500:  #64748b;
+  --color-slate-600:  #475569;
+  --color-slate-700:  #334155;
+  --color-slate-800:  #1e293b;
+  --color-slate-900:  #0f172a;
+  --color-slate-950:  #020617;
+  /* Base */
+  --color-white:      #ffffff;
+  --color-black:      #000000;
+  /* Amber */
+  --color-amber-100:  #fef3c7;
+  --color-amber-200:  #fde68a;
+  --color-amber-300:  #fcd34d;
+  --color-amber-400:  #fbbf24;
+  --color-amber-500:  #f59e0b;
+  --color-amber-600:  #d97706;
+  --color-amber-700:  #b45309;
+  /* Indigo */
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  /* Violet */
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  /* Emerald */
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  /* Rose */
+  --color-rose-300:   #fda4af;
+  --color-rose-400:   #fb7185;
+  --color-rose-500:   #f43f5e;
+  --color-rose-600:   #e11d48;
+  /* Blue */
+  --color-blue-300:   #93c5fd;
+  --color-blue-400:   #60a5fa;
+  --color-blue-500:   #3b82f6;
+  --color-blue-600:   #2563eb;
+  /* Gray */
+  --color-gray-400:   #9ca3af;
+  --color-gray-500:   #6b7280;
+  --color-gray-600:   #4b5563;
+  --color-gray-700:   #374151;
+  --color-gray-800:   #1f2937;
+  --color-gray-900:   #111827;
+  /* App-level */
   --background: #020617;
   --foreground: #f8fafc;
 }
 
-.dark-theme-base {
-  background-color: #020617;
-  color: #f8fafc;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
+/* 强制深色背景 — 任何情况下保底 */
+html, body {
+  background-color: #020617 !important;
+  color: #f8fafc !important;
+  min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 /* WeChat WebView: backdrop-filter fallback */
 .glass-morphism {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.90);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-morphism-indigo {
-  background: rgba(30, 27, 75, 0.80);
+  background: rgba(30, 27, 75, 0.85);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(99, 102, 241, 0.2);
@@ -94,8 +104,8 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
 
