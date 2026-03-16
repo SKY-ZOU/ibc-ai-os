@@ -1,7 +1,46 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { prisma } from '../../../../lib/prisma'
 
 export const dynamic = 'force-dynamic'
+
+const BASE_URL = 'https://ibcbarter.com'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; country: string }>
+}): Promise<Metadata> {
+  const { locale, country: rawCountry } = await params
+  const country = decodeURIComponent(rawCountry)
+  const isZh = locale === 'zh-CN'
+
+  const title = isZh
+    ? `${country} 跨境易货贸易企业 | IBC AI Trade OS`
+    : `${country} Cross-border Barter Trade Enterprises | IBC AI Trade OS`
+  const description = isZh
+    ? `探索来自 ${country} 的跨境易货贸易企业，寻找供需匹配机会，AI 驱动的全球贸易撮合平台。`
+    : `Discover cross-border barter trade enterprises from ${country}. Find supply-demand matching opportunities on IBC's AI-powered global trade platform.`
+  const url = `${BASE_URL}/${locale}/countries/${encodeURIComponent(country)}`
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'zh-CN': `${BASE_URL}/zh-CN/countries/${encodeURIComponent(country)}`,
+        en: `${BASE_URL}/en/countries/${encodeURIComponent(country)}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+    },
+  }
+}
 
 const FLAGS: Record<string, string> = {
   '中国': '🇨🇳', '美国': '🇺🇸', '英国': '🇬🇧', '德国': '🇩🇪', '法国': '🇫🇷',

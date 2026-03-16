@@ -7,6 +7,172 @@ import SolutionsSection from './_components/solutions-section'
 import ProductPlatform from './_components/product-platform'
 import EnterpriseStats from './_components/enterprise-stats'
 
+const BASE_URL = 'https://ibcbarter.com'
+
+function JsonLd({ locale }: { locale: string }) {
+  const isZh = locale === 'zh-CN'
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${BASE_URL}/#organization`,
+        name: 'IBC AI Trade OS',
+        alternateName: isZh ? 'IBC 易货贸易操作系统' : 'IBC Barter',
+        url: BASE_URL,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${BASE_URL}/logo.png`,
+        },
+        description: isZh
+          ? '以中国为核心交易枢纽的 AI 跨境易货贸易平台，连接全球供需双方'
+          : 'AI-powered cross-border barter trade platform with China as the core hub, connecting global buyers and sellers',
+        foundingDate: '2023',
+        foundingLocation: 'Hong Kong',
+        areaServed: 'Worldwide',
+        numberOfEmployees: { '@type': 'QuantitativeValue', value: 50 },
+        sameAs: ['https://skyw.group'],
+        parentOrganization: {
+          '@type': 'Organization',
+          name: 'SkyW Capital',
+          url: 'https://skyw.group',
+        },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${BASE_URL}/#website`,
+        url: BASE_URL,
+        name: 'IBC AI Trade OS',
+        publisher: { '@id': `${BASE_URL}/#organization` },
+        inLanguage: ['zh-CN', 'en'],
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${BASE_URL}/${locale}/opportunities?q={search_term_string}`,
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${BASE_URL}/${locale}/#webpage`,
+        url: `${BASE_URL}/${locale}`,
+        name: isZh ? 'IBC AI 易货贸易操作系统 - 全球跨境AI易货交易平台' : 'IBC AI Trade OS - Global Cross-border AI Barter Trading Platform',
+        isPartOf: { '@id': `${BASE_URL}/#website` },
+        about: { '@id': `${BASE_URL}/#organization` },
+        inLanguage: locale,
+      },
+      {
+        '@type': 'Service',
+        '@id': `${BASE_URL}/#service`,
+        name: isZh ? 'AI 跨境易货贸易撮合服务' : 'AI Cross-border Barter Trade Matching',
+        provider: { '@id': `${BASE_URL}/#organization` },
+        serviceType: isZh ? '易货贸易 / 跨境贸易撮合' : 'Barter Trade / Cross-border Trade Matching',
+        areaServed: 'Worldwide',
+        description: isZh
+          ? 'AI 驱动的跨境易货贸易平台，提供智能匹配、定价验证、多元结算服务'
+          : 'AI-driven cross-border barter platform offering smart matching, pricing validation, and multi-currency settlement',
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: isZh
+          ? [
+              {
+                '@type': 'Question',
+                name: '什么是跨境易货贸易？',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: '跨境易货贸易（Barter Trade）是指企业之间以货换货、以服务换货物的贸易方式，无需全额美元结算。IBC 平台通过 AI 智能匹配，帮助全球企业找到合适的易货对手方，完成真实贸易成交。',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'IBC AI Trade OS 如何帮助企业降低美元依赖？',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'IBC 平台支持 USDT/USDC/CNHC 等多链稳定币结算，同时提供易货抵扣、托管支付和组合结算路径，企业可将美元结算比例从 100% 降低至 30% 以下，大幅节省汇率损耗和中间行手续费。',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: '平台如何进行 AI 智能匹配？',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'IBC 的 AI 匹配引擎基于企业画像、商品标签、历史交易记录和实时市场数据，自动识别供需双方的最优匹配对，并给出匹配度评分、价格参考和风险提示，全程无需人工介入。',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: '哪些行业适合使用易货贸易？',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'IBC 平台覆盖矿产资源、能源化工、农业大宗、纺织轻工、机械设备、电子元器件、建材钢铁、医药健康八大核心行业，尤其适合有大量库存积压、季节性产能过剩或外汇管制困扰的企业。',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: '如何在 IBC 平台免费入驻？',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: '点击平台首页「免费入驻」按钮，填写企业基本信息、上传营业执照、描述供给与采购需求，完成认证后即可免费发布供需、进入 AI 匹配池，无任何前期费用。',
+                },
+              },
+            ]
+          : [
+              {
+                '@type': 'Question',
+                name: 'What is cross-border barter trade?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Cross-border barter trade is a business exchange where companies trade goods or services directly without full USD payment. IBC\'s AI matching platform connects global enterprises to find compatible barter partners and complete real trade deals.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'How does IBC AI Trade OS reduce USD dependency?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'IBC supports multi-chain stablecoin settlement (USDT/USDC/CNHC), barter offsets, escrow payments, and hybrid settlement paths. Enterprises can reduce USD exposure from 100% to under 30%, saving significant FX losses and correspondent bank fees.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'How does the AI smart matching work?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'IBC\'s AI matching engine analyzes enterprise profiles, product tags, trade history, and real-time market data to identify optimal supply-demand matches. It provides match scores, price references, and risk flags — fully automated without human intervention.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'Which industries are best suited for barter trade?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'IBC covers 8 core industries: minerals, energy & chemicals, agricultural commodities, textiles, machinery, electronics, steel & construction, and pharmaceuticals. It\'s ideal for businesses with excess inventory, seasonal overcapacity, or foreign exchange restrictions.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'How do I join IBC for free?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Click "Get Started Free" on the homepage, fill in your company details, upload your business license, and describe your supply and procurement needs. After verification, you can post supply/demand and enter the AI matching pool at zero cost.',
+                },
+              },
+            ],
+      },
+    ],
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const isZh = locale === 'zh-CN'
@@ -592,6 +758,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd locale={locale} />
       {/* ── Header ── */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0f172a]/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
