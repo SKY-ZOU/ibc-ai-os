@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation'
 import { prisma } from '../../../../lib/prisma'
+
+export const dynamic = 'force-dynamic'
 import EnterpriseTabs from './_components/enterprise-tabs'
 
 const STATUS_BADGE: Record<string, { label: string; labelEn: string; cls: string }> = {

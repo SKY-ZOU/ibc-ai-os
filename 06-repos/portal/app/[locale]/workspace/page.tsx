@@ -1,4 +1,6 @@
 import { prisma } from '../../../lib/prisma'
+
+export const dynamic = 'force-dynamic'
 import WorkspaceBoard from './_components/workspace-board'
 
 export default async function WorkspacePage({ params }: { params: Promise<{ locale: string }> }) {

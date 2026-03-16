@@ -1,5 +1,7 @@
 import { prisma } from '../../../../lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 const CATS = ['农产品','矿产资源','能源','化工品','钢铁金属','纺织品','电子产品','机械设备','建材','消费品','医疗健康','其他']
 
 function fmtBudget(min: number | null, max: number | null, currency: string) {

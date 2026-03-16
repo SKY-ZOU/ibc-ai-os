@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/*
+ * 强制深色背景 — 保底规则，无论 Tailwind 颜色系统是否正常工作
+ * 用 hex 直接设置，不依赖 CSS 变量
+ */
+html, body {
+  background-color: #020617 !important;
+  color: #f8fafc !important;
+  min-height: 100%;
+}
+
 @theme {
   --color-brand-indigo: #6366f1;
   --color-brand-violet: #8b5cf6;

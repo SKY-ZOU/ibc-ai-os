@@ -144,3 +144,29 @@ model Lead {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+// 审核日志
+model AuditLog {
+  id          String   @id @default(cuid())
+  entityType  String   // Enterprise, Opportunity, Quotation, Lead
+  entityId    String
+  action      String   // created, updated, status_changed, deleted
+  field       String?  // 变更的字段
+  oldValue    String?
+  newValue    String?
+  operatorId  String?  // 操作人ID
+  createdAt   DateTime @default(now())
+}
+
+// 通知
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String?  // 接收用户ID，null为系统通知
+  type        String   // enterprise_approved, enterprise_rejected, opportunity_matched, quotation_received, lead_assigned
+  title       String
+  content     String
+  entityType  String?  // 关联实体类型
+  entityId    String?  // 关联实体ID
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}

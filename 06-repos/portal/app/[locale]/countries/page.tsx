@@ -1,5 +1,7 @@
 import { prisma } from '../../../lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 const FLAGS: Record<string, string> = {
   '中国': '🇨🇳', '美国': '🇺🇸', '英国': '🇬🇧', '德国': '🇩🇪', '法国': '🇫🇷',
   '澳大利亚': '🇦🇺', '迪拜/UAE': '🇦🇪', '沙特阿拉伯': '🇸🇦', '印度': '🇮🇳',
