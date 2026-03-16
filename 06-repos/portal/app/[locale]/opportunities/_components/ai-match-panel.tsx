@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { MockOpportunity } from '../../../lib/mock-opportunities'
 import { CATEGORY_LABELS } from '../../../lib/mock-opportunities'
 import { findMatches, type MatchResult } from '../../../lib/match-engine'
@@ -33,6 +33,25 @@ function ReasonBadge({ type, label }: { type: 'strong' | 'medium' | 'weak'; labe
 function MatchCard({ result, rank, isZh, animate }: { result: MatchResult; rank: number; isZh: boolean; animate: boolean }) {
   const { supply, score, reasons } = result
   const scoreColor = score >= 80 ? 'text-emerald-400' : score >= 60 ? 'text-amber-400' : 'text-slate-400'
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'done' | 'error'>('idle')
+
+  async function initiate() {
+    setStatus('loading')
+    try {
+      const res = await fetch('/api/opportunities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `${supply.company} × ${supply.title}`,
+          description: `AI匹配 · 评分 ${score}`,
+          value: supply.price ? parseFloat(String(supply.price).replace(/[^0-9.]/g, '')) || undefined : undefined,
+        }),
+      })
+      if (res.ok) { setStatus('done'); setTimeout(() => setStatus('idle'), 3000) }
+      else setStatus('error')
+    } catch { setStatus('error') }
+  }
+
   return (
     <div className="rounded-xl bg-slate-800/80 border border-slate-700/60 p-4 hover:border-amber-500/30 transition-all">
       {/* Header */}
@@ -68,8 +87,16 @@ function MatchCard({ result, rank, isZh, animate }: { result: MatchResult; rank:
       </div>
 
       {/* CTA */}
-      <button className="mt-3 w-full py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-semibold transition-colors">
-        {isZh ? '发起撮合' : 'Initiate Match'}
+      <button onClick={initiate} disabled={status === 'loading' || status === 'done'}
+        className={`mt-3 w-full py-1.5 rounded-lg border text-xs font-semibold transition-colors ${
+          status === 'done'  ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
+          status === 'error' ? 'bg-rose-500/10 border-rose-500/30 text-rose-400' :
+          'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30 text-amber-400'
+        }`}>
+        {status === 'loading' ? (isZh ? '处理中...' : 'Processing...') :
+         status === 'done'    ? (isZh ? '✓ 已加入工作台' : '✓ Added to Workspace') :
+         status === 'error'   ? (isZh ? '失败，重试' : 'Failed, retry') :
+         (isZh ? '发起撮合' : 'Initiate Match')}
       </button>
     </div>
   )

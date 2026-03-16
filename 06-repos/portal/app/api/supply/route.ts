@@ -1,5 +1,24 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl
+  const category = searchParams.get('category')
+  const q = searchParams.get('q')?.toLowerCase()
+  const limit = Math.min(parseInt(searchParams.get('limit') ?? '30'), 100)
+
+  const products = await prisma.product.findMany({
+    where: {
+      status: 'active',
+      ...(category && category !== 'all' ? { category } : {}),
+      ...(q ? { OR: [{ name: { contains: q } }, { description: { contains: q } }] } : {}),
+    },
+    include: { enterprise: { select: { id: true, name: true, country: true } } },
+    orderBy: { createdAt: 'desc' },
+    take: limit,
+  })
+  return NextResponse.json({ data: products, total: products.length })
+}
 
 function cleanString(value: unknown) {
   return typeof value === 'string' ? value.trim() : ''

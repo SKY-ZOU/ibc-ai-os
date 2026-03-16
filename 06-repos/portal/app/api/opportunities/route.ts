@@ -1,24 +1,62 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getMockOpportunities } from '../../lib/mock-opportunities'
+import { prisma } from '../../../lib/prisma'
+
+const SYSTEM_ID = 'system'
+
+async function ensureSystemEnterprise() {
+  await prisma.enterprise.upsert({
+    where: { id: SYSTEM_ID },
+    update: {},
+    create: { id: SYSTEM_ID, name: 'IBC System', country: 'Global', status: 'active' },
+  })
+}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
-  const type     = searchParams.get('type')     // 'supply' | 'demand' | null
-  const category = searchParams.get('category') // category key or null
-  const q        = searchParams.get('q')?.toLowerCase()
-  const minScore = parseInt(searchParams.get('minScore') ?? '0')
+  const stage = searchParams.get('stage')
 
-  let opps = getMockOpportunities()
-
-  if (type && type !== 'all') opps = opps.filter((o) => o.type === type)
-  if (category && category !== 'all') opps = opps.filter((o) => o.category === category)
-  if (q) opps = opps.filter((o) =>
-    o.title.toLowerCase().includes(q) ||
-    o.company.toLowerCase().includes(q) ||
-    o.country.toLowerCase().includes(q) ||
-    o.tags.some((t) => t.toLowerCase().includes(q))
-  )
-  if (minScore > 0) opps = opps.filter((o) => o.aiScore >= minScore)
+  const opps = await prisma.opportunity.findMany({
+    where: {
+      NOT: { enterpriseId: SYSTEM_ID },
+      ...(stage && stage !== 'all' ? { stage } : {}),
+    },
+    include: { enterprise: { select: { id: true, name: true, country: true } } },
+    orderBy: { createdAt: 'desc' },
+    take: 100,
+  })
 
   return NextResponse.json({ data: opps, total: opps.length })
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json()
+    const title = typeof body.title === 'string' ? body.title.trim() : ''
+    if (!title) {
+      return NextResponse.json({ success: false, error: 'title is required' }, { status: 400 })
+    }
+
+    await ensureSystemEnterprise()
+
+    const enterpriseId = typeof body.enterpriseId === 'string' && body.enterpriseId.trim()
+      ? body.enterpriseId.trim()
+      : SYSTEM_ID
+
+    const opp = await prisma.opportunity.create({
+      data: {
+        title,
+        enterpriseId,
+        description: typeof body.description === 'string' ? body.description.trim() || undefined : undefined,
+        stage: 'new',
+        value: typeof body.value === 'number' ? body.value : undefined,
+        currency: typeof body.currency === 'string' ? body.currency : 'USD',
+        probability: 10,
+      },
+    })
+
+    return NextResponse.json({ success: true, data: opp })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to create opportunity'
+    return NextResponse.json({ success: false, error: message }, { status: 500 })
+  }
 }

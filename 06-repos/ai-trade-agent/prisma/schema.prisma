@@ -51,6 +51,24 @@ model PricingRecord {
   createdAt    DateTime @default(now())
 }
 
+// 企业入驻
+model Enterprise {
+  id               String   @id @default(cuid())
+  name             String
+  code             String?  // 统一社会信用代码
+  country          String
+  industry         String?
+  contactName      String?
+  contactPhone     String?
+  contactEmail     String?
+  scale            String?  // small | medium | large
+  businessLicense  String?  // URL or file path
+  tradeMode        String?  // import | export | both
+  status           String   @default("pending") // pending | approved | rejected
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
 // 商机
 model DealOpportunity {
   id           String    @id @default(cuid())
