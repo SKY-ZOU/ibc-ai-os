@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   // Prisma adapter requires serverExternalPackages
   // @libsql/client/web is intentionally NOT listed here so webpack bundles it
   // (the /web variant has no native binaries and is safe to bundle)
-  serverExternalPackages: ['@prisma/client', '@prisma/adapter-libsql'],
+  serverExternalPackages: ['@prisma/client', '@prisma/adapter-libsql', '@libsql/client'],
 }
 
 export default withNextIntl(nextConfig)

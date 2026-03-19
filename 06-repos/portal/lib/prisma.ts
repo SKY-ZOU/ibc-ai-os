@@ -1,15 +1,22 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaLibSQL } from '@prisma/adapter-libsql'
-import { createClient } from '@libsql/client/web'
 
-function createPrismaClient() {
+function createPrismaClient(): PrismaClient {
   if (process.env.TURSO_DATABASE_URL && process.env.TURSO_AUTH_TOKEN) {
-    const libsql = createClient({
-      url: process.env.TURSO_DATABASE_URL,
-      authToken: process.env.TURSO_AUTH_TOKEN,
-    })
-    const adapter = new PrismaLibSQL(libsql)
-    return new PrismaClient({ adapter } as any)
+    try {
+      // Use require() so the module is loaded lazily (not at parse time),
+      // preventing Lambda startup crashes if the native binary is unavailable.
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { createClient } = require('@libsql/client/web')
+      const libsql = createClient({
+        url: process.env.TURSO_DATABASE_URL,
+        authToken: process.env.TURSO_AUTH_TOKEN,
+      })
+      const adapter = new PrismaLibSQL(libsql)
+      return new PrismaClient({ adapter } as any)
+    } catch (e) {
+      console.error('[Prisma] Turso client init failed, falling back to local:', e)
+    }
   }
   return new PrismaClient()
 }
