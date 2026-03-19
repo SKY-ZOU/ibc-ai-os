@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import MatchClient from './_components/match-client'
 
 export default async function MatchPage({
