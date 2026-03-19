@@ -1,13 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaLibSQL } from '@prisma/adapter-libsql'
-import { createClient } from '@libsql/client'
+import { createClient } from '@libsql/client/web'
 
 function createPrismaClient() {
   if (process.env.TURSO_DATABASE_URL && process.env.TURSO_AUTH_TOKEN) {
-    // Force HTTPS scheme to avoid native binary lookup in serverless environments
-    const url = process.env.TURSO_DATABASE_URL.replace(/^libsql:\/\//, 'https://')
     const libsql = createClient({
-      url,
+      url: process.env.TURSO_DATABASE_URL,
       authToken: process.env.TURSO_AUTH_TOKEN,
     })
     const adapter = new PrismaLibSQL(libsql)
