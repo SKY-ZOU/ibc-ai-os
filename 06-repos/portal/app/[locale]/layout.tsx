@@ -108,7 +108,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className="bg-slate-950 text-white">{children}</body>
+      <body >{children}</body>
     </html>
   )
 }
