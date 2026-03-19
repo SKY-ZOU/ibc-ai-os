@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts')
 
 const nextConfig: NextConfig = {
   // Prisma adapter requires serverExternalPackages
-  serverExternalPackages: ['@prisma/client', '@prisma/adapter-libsql', '@libsql/client'],
+  serverExternalPackages: ['@prisma/client', '@prisma/adapter-libsql', '@libsql/client', '@libsql/client/web'],
 }
 
 export default withNextIntl(nextConfig)
