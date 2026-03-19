@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Explicit source scanning for production builds (Tailwind CSS v4) */
+@source "./**/*.{ts,tsx,js,jsx}";
+@source "../lib/**/*.{ts,tsx,js,jsx}";
+
 @theme {
   --color-brand-indigo: #6366f1;
   --color-brand-violet: #8b5cf6;
