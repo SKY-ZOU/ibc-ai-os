@@ -108,7 +108,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body suppressHydrationWarning>{children}</body>
+      <body className="antialiased" suppressHydrationWarning>{children}</body>
     </html>
   )
 }
