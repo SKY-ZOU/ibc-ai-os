@@ -82,6 +82,9 @@ export async function POST(request: Request) {
       },
     })
 
+    // 异步触发匹配（不阻塞响应）
+    import('@/lib/matching-engine').then(m => m.runMatching({ demandId: demand.id, useAI: true })).catch(() => {})
+
     return NextResponse.json({ success: true, data: { id: demand.id, name: demand.title } })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to create demand'

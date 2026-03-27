@@ -20,12 +20,36 @@ export async function GET(req: NextRequest) {
       NOT: { enterpriseId: SYSTEM_ID },
       ...(stage && stage !== 'all' ? { stage } : {}),
     },
-    include: { enterprise: { select: { id: true, name: true, country: true } } },
-    orderBy: { createdAt: 'desc' },
+    include: {
+      enterprise: { select: { id: true, name: true, country: true } },
+      matches: {
+        take: 1,
+        orderBy: { matchScore: 'desc' },
+        select: {
+          matchScore: true,
+          matchReason: true,
+          product: { select: { category: true } },
+          demand: { select: { category: true } },
+        },
+      },
+    },
+    orderBy: { probability: 'desc' },
     take: 100,
   })
 
-  return NextResponse.json({ data: opps, total: opps.length })
+  // 展平 matches 数据到顶层，方便前端直接使用
+  const enriched = opps.map(opp => {
+    const topMatch = opp.matches[0]
+    return {
+      ...opp,
+      matches: undefined,
+      aiScore: topMatch ? Math.round(topMatch.matchScore) : opp.probability,
+      aiReason: topMatch?.matchReason ?? opp.description,
+      category: topMatch?.product?.category ?? topMatch?.demand?.category ?? null,
+    }
+  })
+
+  return NextResponse.json({ data: enriched, total: enriched.length })
 }
 
 export async function POST(req: NextRequest) {

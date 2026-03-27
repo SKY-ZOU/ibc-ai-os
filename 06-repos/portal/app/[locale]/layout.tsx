@@ -1,7 +1,11 @@
 import '../globals.css'
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
+import { getMessages } from 'next-intl/server'
 import { routing } from '@/app/routing'
+import Navbar from './_components/navbar'
+import Footer from './_components/footer'
+import IntlProvider from './_components/intl-provider'
 
 const BASE_URL = 'https://ibcbarter.com'
 
@@ -106,9 +110,17 @@ export default async function LocaleLayout({
     notFound()
   }
 
+  const messages = await getMessages()
+
   return (
     <html lang={locale}>
-      <body className="antialiased" suppressHydrationWarning>{children}</body>
+      <body className="antialiased bg-[#020617] text-white" suppressHydrationWarning>
+        <IntlProvider locale={locale} messages={messages}>
+          <Navbar />
+          <main className="min-h-[calc(100vh-73px)]">{children}</main>
+          <Footer />
+        </IntlProvider>
+      </body>
     </html>
   )
 }
