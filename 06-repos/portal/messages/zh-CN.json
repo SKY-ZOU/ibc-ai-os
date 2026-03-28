@@ -56,9 +56,23 @@
   },
   "Nav": {
     "home": "首页",
-    "products": "产品",
-    "demands": "需求",
-    "about": "关于"
+    "countries": "国别馆",
+    "opportunities": "商机池",
+    "supply": "供给",
+    "demand": "需求",
+    "onboarding": "立即入驻",
+    "workspace": "工作台",
+    "login": "登录"
+  },
+  "Common": {
+    "browse": "浏览",
+    "post": "发布",
+    "filterByCategory": "按类目筛选",
+    "allCategories": "全部类目",
+    "loading": "加载中...",
+    "noData": "暂无数据",
+    "contact": "联系匹配方",
+    "viewDetails": "查看详情"
   },
   "EntryNav": {
     "home": "首页",

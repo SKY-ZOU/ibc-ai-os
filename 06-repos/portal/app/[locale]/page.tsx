@@ -757,52 +757,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <JsonLd locale={locale} />
-      {/* ── Header ── */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0f172a]/95 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30">
-              <span className="text-white font-black text-base tracking-tight">IBC</span>
-            </div>
-            <div>
-              <span className="font-bold text-white text-sm leading-none block">IBC AI Trade OS</span>
-              <span className="text-amber-400/70 text-[10px] tracking-widest uppercase leading-none">
-                {isZh ? '全球跨境AI易货平台' : 'Global AI Barter Platform'}
-              </span>
-            </div>
-          </div>
-          <nav className="hidden md:flex items-center gap-5">
-            <a href={`/${locale}/onboarding`} className="text-slate-300 hover:text-white text-sm transition-colors">{t.nav.onboarding}</a>
-            <a href={`/${locale}/supply`} className="text-slate-300 hover:text-white text-sm transition-colors">{t.nav.supply}</a>
-            <a href={`/${locale}/demand`} className="text-slate-300 hover:text-white text-sm transition-colors">{t.nav.demand}</a>
-            <a href={`/${locale}/countries`} className="text-slate-300 hover:text-white text-sm transition-colors">{t.nav.countries}</a>
-            <a href={`/${locale}/opportunities`} className="text-amber-400 hover:text-amber-300 text-sm font-semibold transition-colors">{isZh ? '商机池' : 'Opportunities'}</a>
-            <a href={`/${locale}/workspace`} className="text-slate-300 hover:text-white text-sm transition-colors">{isZh ? '工作台' : 'Workspace'}</a>
-            {/* Language Switcher */}
-            <div className="flex items-center gap-0.5 border border-slate-700 rounded-lg overflow-hidden text-xs">
-              <a href="/zh-CN" className={`px-2.5 py-1.5 transition-colors ${locale === 'zh-CN' ? 'bg-slate-700 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}>简中</a>
-              <a href="/en" className={`px-2.5 py-1.5 transition-colors ${locale === 'en' ? 'bg-slate-700 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}>EN</a>
-            </div>
-            <a
-              href={`/${locale}/login`}
-              className="px-4 py-2 border border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white font-semibold text-sm rounded-lg transition-colors"
-            >
-              {isZh ? '登录' : 'Login'}
-            </a>
-            <a
-              href={`/${locale}/onboarding`}
-              className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-[#0f172a] font-semibold text-sm rounded-lg transition-colors shadow-md shadow-amber-500/20"
-            >
-              {t.cta.primary}
-            </a>
-          </nav>
-        </div>
-      </header>
-
       {/* ── Hero ── */}
-      <div className='relative overflow-hidden'><ParticleBackground /><div className='relative overflow-hidden bg-slate-950'><ParticleBackground /><div className='relative overflow-hidden bg-slate-950'><ParticleBackground /><HeroClient locale={locale} t={t} /></div></div></div>
+      <div className='relative overflow-hidden bg-slate-950'>
+        <ParticleBackground />
+        <HeroClient locale={locale} t={t} />
+      </div>
 
       {/* ── Core Value Propositions ── */}
       <section className="py-24 bg-white">
@@ -1219,99 +1180,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* ── Enterprise Stats ── */}
       <EnterpriseStats isZh={isZh} />
-
-      {/* ── Footer ── */}
-      <footer className="bg-[#070e1f] border-t border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            {/* Brand col */}
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                  <span className="text-white font-black text-sm">IBC</span>
-                </div>
-                <div>
-                  <div className="text-white font-bold text-sm leading-none">IBC AI Trade OS</div>
-                  <div className="text-amber-400/60 text-[10px] tracking-widest uppercase mt-0.5">ibcdx.com</div>
-                </div>
-              </div>
-              <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                {isZh
-                  ? '以AI、稳定币、RWA与公链，重构全球跨境贸易新基建。立足香港，连接全球。'
-                  : 'Rebuilding global cross-border trade infrastructure with AI, stablecoins, RWA & blockchain. Based in Hong Kong.'}
-              </p>
-              <div className="inline-flex items-center gap-2 text-xs text-amber-400/70 border border-amber-500/20 rounded-full px-3 py-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                {t.footer.tagline}
-              </div>
-            </div>
-            {/* About */}
-            <div>
-              <h4 className="text-slate-300 font-semibold text-sm mb-4">{t.footer.about}</h4>
-              <ul className="space-y-2.5">
-                {t.footer.links.about.map((l) => (
-                  <li key={l.label}><a href={l.href} className="text-slate-500 hover:text-slate-300 text-sm transition-colors">{l.label}</a></li>
-                ))}
-              </ul>
-            </div>
-            {/* Product */}
-            <div>
-              <h4 className="text-slate-300 font-semibold text-sm mb-4">{t.footer.product}</h4>
-              <ul className="space-y-2.5">
-                {t.footer.links.product.map((l) => (
-                  <li key={l.label}><a href={l.href} className="text-slate-500 hover:text-slate-300 text-sm transition-colors">{l.label}</a></li>
-                ))}
-              </ul>
-            </div>
-            {/* Company */}
-            <div>
-              <h4 className="text-slate-300 font-semibold text-sm mb-4">{t.footer.company}</h4>
-              <ul className="space-y-2.5">
-                {t.footer.links.company.map((l) => (
-                  <li key={l.label}><a href={l.href} className="text-slate-500 hover:text-slate-300 text-sm transition-colors">{l.label}</a></li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          {/* Bottom bar */}
-          <div className="pt-8 border-t border-slate-800/60 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-slate-600 text-xs">
-              © 2026 IBC AI Trade OS (International Barter & Digital Trade Center). {isZh ? '版权所有。本网站内容仅供参考，不构成任何投资或法律建议。' : 'All rights reserved. Content for reference only, not investment or legal advice.'}
-            </p>
-            <div className="flex items-center gap-4 text-slate-600 text-xs">
-              <a href="#" className="hover:text-slate-400 transition-colors">{isZh ? '隐私政策' : 'Privacy'}</a>
-              <span>·</span>
-              <a href="#" className="hover:text-slate-400 transition-colors">{isZh ? '服务条款' : 'Terms'}</a>
-              <span>·</span>
-              <a href="#" className="hover:text-slate-400 transition-colors">Hong Kong SAR</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* ── Mobile Bottom Navigation ── */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0f172a]/95 backdrop-blur-md border-t border-slate-700/60">
-        <div className="grid grid-cols-5 gap-0">
-          {[
-            { href: `/${locale}`, label: isZh ? '首页' : 'Home', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-            { href: `/${locale}/opportunities`, label: isZh ? '商机' : 'Opps', icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' },
-            { href: `/${locale}/supply`, label: isZh ? '供给' : 'Supply', icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4' },
-            { href: `/${locale}/demand`, label: isZh ? '需求' : 'Demand', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01' },
-            { href: `/${locale}/onboarding`, label: isZh ? '入驻' : 'Join', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="flex flex-col items-center justify-center py-3 gap-1 text-slate-400 hover:text-amber-400 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d={item.icon} />
-              </svg>
-              <span className="text-[10px] font-medium">{item.label}</span>
-            </a>
-          ))}
-        </div>
-      </nav>
     </div>
   )
 }

@@ -56,9 +56,23 @@
   },
   "Nav": {
     "home": "Home",
-    "products": "Products",
-    "demands": "Demands",
-    "about": "About"
+    "countries": "Pavilions",
+    "opportunities": "Opps Pool",
+    "supply": "Supply",
+    "demand": "Demand",
+    "onboarding": "Join Now",
+    "workspace": "Workspace",
+    "login": "Login"
+  },
+  "Common": {
+    "browse": "Browse",
+    "post": "Post",
+    "filterByCategory": "Category",
+    "allCategories": "All Categories",
+    "loading": "Loading...",
+    "noData": "No data found",
+    "contact": "Contact",
+    "viewDetails": "View Details"
   },
   "EntryNav": {
     "home": "Home",
